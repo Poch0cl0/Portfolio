@@ -38,6 +38,7 @@ export const assets = {
     label: "CV PDF",
   },
   obstetricareCover: {
+    /* no sirve */
     src: "/images/projects/obstetricare/cover.jpg",
     width: 1280,
     height: 720,
