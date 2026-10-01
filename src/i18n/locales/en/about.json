@@ -1,0 +1,26 @@
+{
+  "experienceTitle": "Project experience",
+  "education": {
+    "unt-systems": {
+      "degree": "Systems Engineering",
+      "institution": "Universidad Nacional de Trujillo",
+      "location": "Trujillo, Peru",
+      "description": "Training in software development, systems architecture, and academic/professional projects with a full-stack focus."
+    }
+  },
+  "experience": {
+    "obstetricare": {
+      "title": "ObstetriCare — Early Warning System",
+      "organization": "Academic/professional project",
+      "period": "May 2026 – July 2026",
+      "description": "Full-stack development of an early warning system for preterm birth prevention with FastAPI backend, React/TypeScript frontend, ML pipeline, and clinical dashboards."
+    },
+    "amara": {
+      "title": "Amará — Emotional wellness platform",
+      "organization": "Personal project",
+      "period": "July 2026 – August 2026",
+      "description": "Full-stack platform with Next.js, Supabase, and AI for emotional tracking, conversational assistant, and social features with a public demo on Vercel."
+    }
+  },
+  "studentOf": "Student of {degree} at {institution}."
+}

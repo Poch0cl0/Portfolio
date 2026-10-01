@@ -1,0 +1,51 @@
+{
+  "categories": {
+    "Frontend": "Frontend",
+    "Backend": "Backend",
+    "Base de datos": "Databases",
+    "IA/ML": "AI/ML",
+    "Infra/DevOps": "Infra/DevOps",
+    "Testing": "Testing"
+  },
+  "evidence": {
+    "amara": "Evidence: amar-gold.vercel.app",
+    "obstetricare": "Evidence: ObstetriCare",
+    "both": "Evidence: ObstetriCare and Amará",
+    "portfolio": "Evidence: this portfolio"
+  },
+  "descriptions": {
+    "Next.js 16": "App Router, API Routes, and Vercel deployment in Amará.",
+    "React 19": "Reactive interfaces in ObstetriCare and Amará.",
+    "TypeScript": "Strict typing for API contracts, Zod schemas, and components.",
+    "Tailwind CSS": "Systematic design and reusable components.",
+    "Tailwind CSS 4": "CSS tokens and responsive design in Amará.",
+    "Vite": "ObstetriCare React frontend with optimized build.",
+    "Recharts": "Clinical dashboards with data visualization.",
+    "i18n": "Bilingual ES/EN support in Amará.",
+    "FastAPI": "Async API with JWT authentication and roles.",
+    "Python 3.12": "Business logic, ML, and report pipelines.",
+    "SQLAlchemy 2.0 async": "Non-blocking database operations.",
+    "asyncpg": "Async driver for PostgreSQL 16.",
+    "Alembic": "14 versioned migrations of the clinical schema.",
+    "JWT": "Role-based authentication for clinical access.",
+    "Supabase": "Auth, Storage, and serverless backend in Amará.",
+    "API Routes autenticadas": "Protected endpoints in Next.js App Router.",
+    "PostgreSQL 16": "Relational persistence for the clinical system.",
+    "PostgreSQL": "Database with RLS policies in Supabase.",
+    "RLS": "Row-level security for sensitive data.",
+    "Redis": "Cache for query and report optimization.",
+    "Gemini 2.0 Flash": "Clinical recommendations with rule-based fallback.",
+    "OpenAI GPT-4o-mini": "Conversational assistant with persistent history.",
+    "Random Forest": "Supervised model in consensus over 10 clinical variables.",
+    "CatBoost": "Supervised model in 3-stage ML pipeline.",
+    "SVM": "Classifier in risk prediction ensemble.",
+    "Regresión Logística Ordinal": "Ordinal model in clinical weighted consensus.",
+    "Árbol de Decisión": "Interpretable model in triage pipeline.",
+    "Vercel": "Public demo deployed in production.",
+    "Migraciones SQL versionadas": "Controlled schema evolution in Supabase.",
+    "YouTube API": "Integrated player for wellness resources.",
+    "WeasyPrint": "Automated PDF report generation.",
+    "OpenPyXL": "Excel report export.",
+    "pytest": "Automated tests for critical services."
+  }
+}

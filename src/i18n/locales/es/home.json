@@ -1,0 +1,113 @@
+{
+  "hero": {
+    "srTitle": "Jefferson Peña Serrano — Desarrollador Full-Stack",
+    "photoAlt": "Jefferson Peña Serrano, desarrollador full-stack",
+    "kicker": "Sistemas & Software Engineering · {location} · Disponible para proyectos",
+    "description": "Estudiante de Ingeniería de Sistemas en la {university}. Construyo aplicaciones full-stack modernas combinando arquitecturas limpias, rendimiento y soluciones aplicadas a salud clínica y bienestar.",
+    "viewProjects": "Ver Proyectos Destacados",
+    "contactMe": "Contactarme",
+    "stackLabel": "Stack & Frameworks en Producción"
+  },
+  "profileCard": {
+    "terminalPath": "sys://engineer.kernel/profile",
+    "status": "STATUS: ACTIVE",
+    "degree": "Ingeniería de Sistemas",
+    "focus": "Async Architectures & Applied ML",
+    "architectureLabel": "Arquitectura",
+    "architectureTitle": "Pipeline ML 3 etapas",
+    "architectureDesc": "Consenso sobre 10 variables clínicas",
+    "validationLabel": "Validación ML",
+    "validationTitle": "Random Forest + CatBoost",
+    "validationDesc": "SVM, Regresión Ordinal, Árbol de Decisión",
+    "code": {
+      "variable": "desarrollador",
+      "nameKey": "nombre",
+      "universityKey": "universidad",
+      "degreeKey": "carrera",
+      "locationKey": "ubicacion",
+      "focusKey": "enfoque",
+      "coreStackKey": "stackPrincipal",
+      "shippedProductsKey": "productosLanzados",
+      "degreeValue": "Ingeniería de Sistemas",
+      "focusValue": "Arquitecturas asincronas y ML aplicado",
+      "coreStack": ["Next.js 16", "FastAPI async", "Postgres 16"],
+      "shippedProducts": ["ObstetriCare", "Amara Wellness"]
+    }
+  },
+  "capabilities": {
+    "kicker": "Pilares de Ingeniería",
+    "title": "Capacidades técnicas estructuradas para escala",
+    "description": "No solo escribo sintaxis; diseño contratos de API consistentes, aislamiento de dependencias y experiencia de usuario fluida.",
+    "items": {
+      "fullstack": {
+        "title": "Full-Stack Development",
+        "description": "Arquitecturas modulares con Next.js App Router, React 19, TypeScript y microservicios asíncronos en FastAPI.",
+        "technologies": ["Next.js 16", "FastAPI async", "React 19"]
+      },
+      "ai-ml": {
+        "title": "Integración de IA & ML",
+        "description": "Pipelines de clasificación clínica, modelado supervisado (Random Forest, CatBoost, SVM) y asistentes conversacionales con Gemini 2.0 Flash y GPT-4o-mini.",
+        "technologies": ["Gemini 2.0 Flash", "Random Forest", "GPT-4o-mini"]
+      },
+      "persistence": {
+        "title": "Bases de Datos & Persistencia",
+        "description": "PostgreSQL 16, SQLAlchemy 2.0 async, migraciones Alembic, Supabase con Row Level Security y caché Redis.",
+        "technologies": ["PostgreSQL 16", "Alembic", "Supabase RLS"]
+      },
+      "devops": {
+        "title": "Despliegue & Testing",
+        "description": "Deploy en Vercel, caché Redis, reportes PDF/Excel con WeasyPrint y OpenPyXL, pruebas con pytest.",
+        "technologies": ["Vercel", "Redis", "pytest"]
+      }
+    }
+  },
+  "featuredProjects": {
+    "kicker": "Casos de Estudio Seleccionados",
+    "title": "Proyectos de Grado Clínico y Productos en Producción",
+    "customArchitecture": "¿Interesado en una arquitectura personalizada?"
+  },
+  "stackPreview": {
+    "kicker": "Arquitectura & Tecnologías",
+    "title": "Stack técnico respaldado por código real",
+    "description": "Cada herramienta ha sido desplegada en sistemas operativos y testeada en proyectos reales.",
+    "tabs": {
+      "all": "Todos",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "databases": "Bases de datos",
+      "aiml": "IA/ML",
+      "devops": "Infra/DevOps",
+      "testing": "Testing"
+    }
+  },
+  "chat": {
+    "kicker": "IA Interactive Explorer",
+    "title": "Pregúntame sobre Jefferson",
+    "description": "Respuestas técnicas estructuradas sobre arquitectura, decisiones de diseño y formación.",
+    "agentLabel": "kernel::ai_query_agent",
+    "inputPlaceholder": "Escribe tu pregunta...",
+    "send": "Enviar",
+    "thinking": "Pensando...",
+    "clear": "Limpiar conversación",
+    "error": "No pude obtener una respuesta. Intenta de nuevo.",
+    "welcome": "Hola, soy el agente de consulta de Jefferson. Pregúntame sobre su stack, ObstetriCare, Amará o decisiones de arquitectura.",
+    "suggestions": {
+      "stack": "¿Qué tecnologías domina Jefferson en backend y frontend?",
+      "obstetricare": "¿Cómo resolvió la predicción clínica en ObstetriCare?",
+      "amara": "¿Cuál es su experiencia con Supabase y Next.js en Amará?"
+    }
+  },
+  "aboutPreview": {
+    "title": "Sobre mí",
+    "description": "Estudiante de Ingeniería de Sistemas en la Universidad Nacional de Trujillo, enfocado en desarrollo full-stack y proyectos con impacto técnico real."
+  },
+  "cta": {
+    "kicker": "Iniciemos una conversación técnica",
+    "title": "Construyamos software con impacto real",
+    "description": "¿Tienes una idea que requiere arquitectura sólida, integración de IA o precisión full-stack? Estoy disponible para nuevos retos profesionales y consultoría de software.",
+    "timezone": "Zona horaria GMT-5",
+    "emailResponse": "Respuesta por correo",
+    "writeEmail": "Escríbeme por Correo",
+    "viewStack": "Ver mi Stack Completo"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "categories": {
+    "Frontend": "Frontend",
+    "Backend": "Backend",
+    "Base de datos": "Base de datos",
+    "IA/ML": "IA/ML",
+    "Infra/DevOps": "Infra/DevOps",
+    "Testing": "Testing"
+  },
+  "evidence": {
+    "amara": "Evidencia: amar-gold.vercel.app",
+    "obstetricare": "Evidencia: ObstetriCare",
+    "both": "Evidencia: ObstetriCare y Amará",
+    "portfolio": "Evidencia: este portafolio"
+  },
+  "descriptions": {
+    "Next.js 16": "App Router, API Routes y despliegue en Vercel en Amará.",
+    "React 19": "Interfaces reactivas en ObstetriCare y Amará.",
+    "TypeScript": "Tipado estricto de contratos API, schemas Zod y componentes.",
+    "Tailwind CSS": "Diseño sistemático y componentes reutilizables.",
+    "Tailwind CSS 4": "Tokens CSS y diseño responsive en Amará.",
+    "Vite": "Frontend React de ObstetriCare con build optimizado.",
+    "Recharts": "Dashboards clínicos con visualización de datos.",
+    "i18n": "Soporte bilingüe ES/EN en Amará.",
+    "FastAPI": "API async con autenticación JWT y roles.",
+    "Python 3.12": "Lógica de negocio, ML y pipelines de reportes.",
+    "SQLAlchemy 2.0 async": "Operaciones de base de datos no bloqueantes.",
+    "asyncpg": "Driver async para PostgreSQL 16.",
+    "Alembic": "14 migraciones versionadas del esquema clínico.",
+    "JWT": "Autenticación con roles para acceso clínico.",
+    "Supabase": "Auth, Storage y backend serverless en Amará.",
+    "API Routes autenticadas": "Endpoints protegidos en Next.js App Router.",
+    "PostgreSQL 16": "Persistencia relacional del sistema clínico.",
+    "PostgreSQL": "Base de datos con políticas RLS en Supabase.",
+    "RLS": "Seguridad a nivel de fila para datos sensibles.",
+    "Redis": "Caché para optimización de consultas y reportes.",
+    "Gemini 2.0 Flash": "Recomendaciones clínicas con fallback por reglas.",
+    "OpenAI GPT-4o-mini": "Asistente conversacional con historial persistente.",
+    "Random Forest": "Modelo supervisado en consenso de 10 variables clínicas.",
+    "CatBoost": "Modelo supervisado en pipeline ML de 3 etapas.",
+    "SVM": "Clasificador en ensamble de predicción de riesgo.",
+    "Regresión Logística Ordinal": "Modelo ordinal en consenso ponderado clínico.",
+    "Árbol de Decisión": "Modelo interpretable en pipeline de triaje.",
+    "Vercel": "Demo pública desplegada en producción.",
+    "Migraciones SQL versionadas": "Evolución controlada del esquema en Supabase.",
+    "YouTube API": "Reproductor integrado para recursos de bienestar.",
+    "WeasyPrint": "Generación automatizada de reportes PDF.",
+    "OpenPyXL": "Exportación de reportes en Excel.",
+    "pytest": "Pruebas automatizadas de servicios críticos."
+  }
+}

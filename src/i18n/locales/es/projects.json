@@ -1,0 +1,111 @@
+{
+  "detail": {
+    "close": "Cerrar",
+    "pipeline": "Pipeline ML/IA",
+    "roles": "Roles del sistema",
+    "architectureLayers": "Capas de arquitectura"
+  },
+  "sections": {
+    "problem": "Problema",
+    "context": "Contexto",
+    "solution": "Solución",
+    "technologies": "Tecnologías",
+    "architecture": "Arquitectura",
+    "features": "Funcionalidades",
+    "technicalDecisions": "Decisiones técnicas",
+    "results": "Resultados"
+  },
+  "types": {
+    "academico-profesional": "Académico/Profesional",
+    "personal": "Personal"
+  },
+  "obstetricare": {
+    "title": "ObstetriCare",
+    "subtitle": "Sistema de Alerta Temprana para prevención de parto prematuro",
+    "description": "Sistema full-stack para prevención de parto prematuro con alerta temprana, dashboards clínicos y predicción de riesgo basada en consenso de modelos ML.",
+    "problem": "Prevención de parto prematuro y necesidad de alerta temprana en el sector salud materno-infantil.",
+    "context": "Sector salud materno-infantil.",
+    "solution": "Sistema full-stack con backend FastAPI y frontend React/TypeScript para gestión clínica, predicción de riesgo y recomendaciones asistidas por IA.",
+    "sector": "Salud materno-infantil",
+    "period": "Mayo 2026 – Julio 2026",
+    "pipeline": "S-2: consenso Random Forest + CatBoost + SVM sobre 10 variables clínicas → S-3: triaje ordinal (VERDE/AMARILLO/NARANJA/ROJO) → S-4: recomendaciones con Gemini 2.0 Flash y fallback IF-THEN (SOGC 467).",
+    "roles": [
+      "Administrador: usuarios, analytics y acceso completo",
+      "Médico: expediente inteligente, predicción, triaje y feedback de modelos",
+      "Secretaria: dashboard operativo, citas y pacientes (sin módulos ML)"
+    ],
+    "architecture": {
+      "summary": "API FastAPI con autenticación JWT por roles, PostgreSQL 16 con 14 migraciones Alembic y pipeline ML en 3 etapas.",
+      "layers": {
+        "frontend": { "name": "Frontend", "description": "React 19 + TypeScript + Vite + Tailwind CSS con dashboards Recharts." },
+        "api": { "name": "API", "description": "FastAPI con autenticación JWT, roles y endpoints async." },
+        "data": { "name": "Datos", "description": "PostgreSQL 16 con SQLAlchemy 2.0 async y Alembic." },
+        "ml": { "name": "ML/IA", "description": "Pipeline ML en 3 etapas con consenso ponderado y recomendaciones con Gemini 2.0 Flash." }
+      }
+    },
+    "features": [
+      "Agenda médica",
+      "CRUD de pacientes y expedientes",
+      "Dashboards con Recharts",
+      "Predicción de riesgo con consenso ponderado sobre 10 variables clínicas",
+      "Triaje de urgencia",
+      "Recomendaciones clínicas con Gemini 2.0 Flash y fallback por reglas",
+      "Reportes PDF/Excel",
+      "Envío automático por correo",
+      "Documentación técnica",
+      "Pruebas con pytest"
+    ],
+    "technicalDecisions": [
+      "SQLAlchemy async para operaciones de base de datos no bloqueantes",
+      "Migraciones versionadas con Alembic (14 versiones)",
+      "JWT con roles para control de acceso",
+      "Fallback determinístico para IA cuando el servicio no está disponible",
+      "Human-in-the-loop: feedback médico por modelo y dictamen clínico"
+    ],
+    "results": [
+      "Sistema funcional desplegado en entorno académico/profesional",
+      "Documentación técnica completa",
+      "Pruebas automatizadas con pytest"
+    ]
+  },
+  "amara": {
+    "title": "Amará",
+    "subtitle": "Plataforma web de bienestar emocional",
+    "description": "Plataforma full-stack de bienestar emocional con seguimiento, asistente conversacional e integración social.",
+    "problem": "Bienestar emocional, seguimiento y apoyo conversacional.",
+    "context": "Plataforma personal orientada al bienestar emocional y apoyo digital.",
+    "solution": "Plataforma full-stack con Next.js, Supabase e IA para seguimiento emocional, asistente conversacional y funciones sociales.",
+    "sector": "Bienestar emocional",
+    "period": "Julio 2026 – Agosto 2026",
+    "pipeline": "Seguimiento emocional con calendario y mapa de calor → asistente conversacional GPT-4o-mini con historial persistente → funciones sociales con moderación.",
+    "roles": [
+      "Usuario autenticado: seguimiento emocional, chat IA y comunidad",
+      "Backend serverless: Supabase Auth + RLS + API Routes protegidas"
+    ],
+    "architecture": {
+      "summary": "App Router con Supabase Auth/Storage/RLS, migraciones SQL versionadas, API Routes autenticadas y asistente IA con contexto dinámico.",
+      "layers": {
+        "frontend": { "name": "Frontend", "description": "Next.js 16 App Router con Tailwind CSS 4 e i18n ES/EN." },
+        "backend": { "name": "Backend", "description": "API Routes autenticadas y lógica server-side en Next.js." },
+        "data": { "name": "Datos", "description": "Supabase con PostgreSQL, RLS y migraciones SQL versionadas." },
+        "ai": { "name": "IA", "description": "Asistente conversacional con OpenAI GPT-4o-mini e historial persistente." }
+      }
+    },
+    "features": [
+      "Asistente conversacional",
+      "Seguimiento emocional con calendario, mapa de calor y estadísticas",
+      "Sistema social con moderación",
+      "Reproductor YouTube",
+      "i18n ES/EN",
+      "Diseño responsive"
+    ],
+    "technicalDecisions": [
+      "Políticas RLS en Supabase para seguridad a nivel de fila",
+      "Migraciones SQL versionadas para evolución controlada del esquema",
+      "Endpoints autenticados para operaciones sensibles",
+      "Contexto dinámico en IA con historial persistente",
+      "i18n para alcance bilingüe ES/EN"
+    ],
+    "results": ["Demo pública desplegada en Vercel."]
+  }
+}

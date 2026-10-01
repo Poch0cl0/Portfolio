@@ -1,0 +1,25 @@
+{
+  "nav": {
+    "projects": "Proyectos",
+    "about": "Sobre mí",
+    "stack": "Stack"
+  },
+  "footer": {
+    "navigation": "Navegación",
+    "directContact": "Comunicación directa",
+    "githubTodo": "GitHub: TODO",
+    "linkedinTodo": "LinkedIn: TODO",
+    "builtWith": "Built with Next.js 16, TypeScript & Tailwind CSS | Deployed on Vercel",
+    "copyright": "All architectural rights reserved.",
+    "description": "Desarrollador Full-Stack en {location}. Formado en la {university}. Construyendo software robusto, escalable y con foco clínico-tecnológico."
+  },
+  "availability": "Disponible para proyectos",
+  "contact": "Contactar",
+  "copyEmail": "Copiar Correo",
+  "copied": "¡Copiado!",
+  "downloadCv": "Descargar CV (PDF)",
+  "learnMore": "Saber más",
+  "viewDemo": "Ver demo",
+  "viewGithub": "Ver en GitHub",
+  "monogramAlt": "Monograma JP"
+}
