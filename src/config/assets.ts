@@ -38,7 +38,6 @@ export const assets = {
     label: "CV PDF",
   },
   obstetricareCover: {
-    /* no sirve */
     src: "/images/projects/obstetricare/cover.jpg",
     width: 1280,
     height: 720,
@@ -92,6 +91,11 @@ export function getAssetUrl(key: AssetKey): string {
   const entry = getAssetEntry(key);
 
   if (!entry.ready) {
+    return entry.src;
+  }
+
+  // Query strings break next/image on Vercel. Keep cache-busting only in local dev.
+  if (process.env.NODE_ENV !== "development") {
     return entry.src;
   }
 

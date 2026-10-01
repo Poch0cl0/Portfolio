@@ -20,7 +20,6 @@ export function AssetImage({
 }: AssetImageProps) {
   const entry = getAssetEntry(assetKey);
   const src = getAssetUrl(assetKey);
-  const unoptimized = process.env.NODE_ENV === "development";
 
   if (!entry.ready) {
     return (
@@ -46,7 +45,7 @@ export function AssetImage({
         alt={alt}
         fill
         priority={priority}
-        unoptimized={unoptimized}
+        unoptimized
         className={cn("object-cover", className)}
       />
     );
@@ -59,7 +58,7 @@ export function AssetImage({
       width={entry.width}
       height={entry.height}
       priority={priority}
-      unoptimized={unoptimized}
+      unoptimized
       className={cn("h-full w-full object-cover", className)}
     />
   );
@@ -75,7 +74,7 @@ export function MonogramBadge({ className }: { className?: string }) {
         alt="JP"
         width={32}
         height={32}
-        unoptimized={process.env.NODE_ENV === "development"}
+        unoptimized
         className={cn("h-8 w-8", className)}
       />
     );

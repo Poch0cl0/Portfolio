@@ -27,7 +27,7 @@ export function ProjectMedia({ slug, className }: ProjectMediaProps) {
           src={getAssetUrl(assetKey)}
           alt={entry.label}
           fill
-          unoptimized={process.env.NODE_ENV === "development"}
+          unoptimized
           className="object-cover transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent" />
