@@ -35,17 +35,10 @@ export function Navbar() {
         <Link
           href={homeHref}
           onClick={scrollToTop}
-          className="flex shrink-0 items-center gap-space-sm"
+          className="flex shrink-0 items-center rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+          aria-label="Jefferson Peña — Inicio"
         >
-          <MonogramBadge />
-          <div className="flex flex-col">
-            <span className="text-headline-sm leading-none text-on-surface">
-              {siteConfig.shortName}
-            </span>
-            <span className="mt-0.5 font-mono text-label-caps uppercase tracking-wider text-on-surface-variant">
-              {siteConfig.role}
-            </span>
-          </div>
+          <MonogramBadge className="h-10 w-10 border border-primary/30 shadow-sm transition-transform duration-200 hover:scale-105" />
         </Link>
 
         <nav className="hidden items-center gap-space-xs rounded-full bg-surface-container-low px-space-xs py-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)] xl:flex">

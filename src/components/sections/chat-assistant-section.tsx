@@ -9,8 +9,39 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { useDictionary } from "@/i18n/dictionary-provider";
 
-const suggestionKeys = ["stack", "obstetricare", "amara"] as const;
+const initialSuggestionKeys = ["stack", "obstetricare", "amara"] as const;
+const obstetriCareSuggestionKeys = ["obstetriCarePipeline", "obstetriCareSafety", "amara"] as const;
+const amaraSuggestionKeys = ["amaraProduct", "amaraSecurity", "obstetricare"] as const;
+const stackSuggestionKeys = ["architecture", "obstetriCarePipeline", "amaraArchitecture"] as const;
+const generalSuggestionKeys = ["about", "architecture", "career"] as const;
 const TYPEWRITER_MS = 15;
+
+type SuggestionKey =
+  | (typeof initialSuggestionKeys)[number]
+  | (typeof obstetriCareSuggestionKeys)[number]
+  | (typeof amaraSuggestionKeys)[number]
+  | (typeof stackSuggestionKeys)[number]
+  | (typeof generalSuggestionKeys)[number];
+
+function getSuggestionKeys(messages: ChatMessage[]): readonly SuggestionKey[] {
+  const lastUserMessage = [...messages].reverse().find((message) => message.role === "user");
+  if (!lastUserMessage) {
+    return initialSuggestionKeys;
+  }
+
+  const message = lastUserMessage.content.toLocaleLowerCase();
+  if (/(obstetri|parto|triaje|cl[ií]nic|riesgo|ml|machine learning)/.test(message)) {
+    return obstetriCareSuggestionKeys;
+  }
+  if (/(amar[aá]|supabase|bienestar|emocion|emoci[oó]n)/.test(message)) {
+    return amaraSuggestionKeys;
+  }
+  if (/(stack|tecnolog|frontend|backend|fastapi|next\.js|react|postgres)/.test(message)) {
+    return stackSuggestionKeys;
+  }
+
+  return generalSuggestionKeys;
+}
 
 function formatMessageContent(content: string): React.ReactNode[] {
   const lines = content.split("\n");
@@ -167,7 +198,7 @@ function UserBubble({ content }: { content: string }) {
   );
 }
 
-export function ChatAssistantSection() {
+export function ChatAssistantSection({ embedded = false }: { embedded?: boolean }) {
   const { locale, dict } = useDictionary();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
@@ -175,6 +206,7 @@ export function ChatAssistantSection() {
   const [typingMessageIndex, setTypingMessageIndex] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const suggestionKeys = getSuggestionKeys(messages);
 
   const scrollToBottom = () => {
     requestAnimationFrame(() => {
@@ -228,23 +260,45 @@ export function ChatAssistantSection() {
   }
 
   return (
-    <Section surface="lowest">
-      <Container size="narrow" className="flex flex-col gap-space-md">
-        <Reveal>
-          <div className="flex flex-col items-center gap-1 text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-surface-container-high px-3 py-1 font-mono text-label-caps uppercase tracking-wider text-tertiary">
-              <Bot className="h-4 w-4" />
-              <span>{dict.home.chat.kicker}</span>
+    <Section
+      surface={embedded ? "default" : "lowest"}
+      className={embedded ? "!bg-transparent !py-0" : undefined}
+    >
+      <Container
+        size="narrow"
+        className={`flex flex-col gap-space-md ${embedded ? "!max-w-none !px-0" : ""}`}
+      >
+        {!embedded ? (
+          <Reveal>
+            <div className="flex flex-col items-center gap-1 text-center">
+              <div className="inline-flex items-center gap-2 rounded-full bg-surface-container-high px-3 py-1 font-mono text-label-caps uppercase tracking-wider text-tertiary">
+                <Bot className="h-4 w-4" />
+                <span>{dict.home.chat.kicker}</span>
+              </div>
+              <SectionTitle className="mt-1">{dict.home.chat.title}</SectionTitle>
+              <SectionDescription className="mx-auto max-w-lg">
+                {dict.home.chat.description}
+              </SectionDescription>
             </div>
-            <SectionTitle className="mt-1">{dict.home.chat.title}</SectionTitle>
-            <SectionDescription className="mx-auto max-w-lg">
-              {dict.home.chat.description}
-            </SectionDescription>
-          </div>
-        </Reveal>
+          </Reveal>
+        ) : (
+          <Reveal>
+            <div className="flex flex-col gap-1">
+              <div className="inline-flex w-fit items-center gap-2 rounded-full bg-surface-container-high px-3 py-1 font-mono text-label-caps uppercase tracking-wider text-tertiary">
+                <Bot className="h-4 w-4" />
+                <span>{dict.home.chat.kicker}</span>
+              </div>
+              <SectionTitle className="text-headline-md">{dict.home.chat.title}</SectionTitle>
+            </div>
+          </Reveal>
+        )}
 
         <Reveal>
-          <div className="flex flex-col gap-space-sm rounded-xl bg-surface-container-low p-space-md shadow-2xl">
+          <div
+            className={`flex flex-col gap-space-sm rounded-xl bg-surface-container-low p-space-md shadow-2xl ${
+              embedded ? "lg:h-[28rem]" : ""
+            }`}
+          >
             <div className="flex items-center justify-between pb-2">
               <div className="flex items-center gap-2">
                 <span className="h-2.5 w-2.5 rounded-full bg-tertiary" />
@@ -285,7 +339,9 @@ export function ChatAssistantSection() {
 
             <div
               ref={scrollRef}
-              className="mt-2 flex max-h-80 flex-col gap-space-sm overflow-y-auto rounded-lg bg-surface-container-lowest p-space-md"
+              className={`mt-2 flex flex-col gap-space-sm overflow-y-auto rounded-lg bg-surface-container-lowest p-space-md ${
+                embedded ? "min-h-0 flex-1" : "max-h-80"
+              }`}
             >
               {messages.length === 0 ? (
                 <AgentBubble content={dict.home.chat.welcome} />

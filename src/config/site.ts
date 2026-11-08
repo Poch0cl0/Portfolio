@@ -9,9 +9,8 @@ export const siteConfig = {
   location: "Trujillo, Perú",
   university: "Universidad Nacional de Trujillo",
   email: "jefferson152530@gmail.com",
-  github: "TODO: https://github.com/Poch0cl0",
-  linkedin:
-    "TODO: https://www.linkedin.com/in/jefferson-pe%C3%B1a-4ab9462a6/?isSelfProfile=true",
+  github: "https://github.com/Poch0cl0",
+  linkedin: "https://www.linkedin.com/in/jefferson-pe%C3%B1a-4ab9462a6/",
   cvPath: "/cv/cv-jefferson-pena-serrano.pdf",
   avatarPath: "/images/avatar/jefferson.jpg",
   defaultOgImage: "/images/og/default-og.webp",

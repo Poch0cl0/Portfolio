@@ -1,12 +1,11 @@
 {
   "hero": {
-    "srTitle": "Jefferson Peña Serrano — Desarrollador Full-Stack",
+    "name": "Jefferson Peña",
+    "role": "Desarrollador Full Stack",
     "photoAlt": "Jefferson Peña Serrano, desarrollador full-stack",
-    "kicker": "Sistemas & Software Engineering · {location} · Disponible para proyectos",
-    "description": "Estudiante de Ingeniería de Sistemas en la {university}. Construyo aplicaciones full-stack modernas combinando arquitecturas limpias, rendimiento y soluciones aplicadas a salud clínica y bienestar.",
+    "description": "Estudiante de Ingeniería de Sistemas en la Universidad Nacional de Trujillo, especializado en desarrollo web full-stack con Next.js, React, TypeScript, FastAPI y PostgreSQL. Desarrollo aplicaciones que integran Machine Learning e IA conversacional para resolver problemas reales.",
     "viewProjects": "Ver Proyectos Destacados",
-    "contactMe": "Contactarme",
-    "stackLabel": "Stack & Frameworks en Producción"
+    "contactMe": "Contactarme"
   },
   "profileCard": {
     "terminalPath": "sys://engineer.kernel/profile",
@@ -81,20 +80,28 @@
     }
   },
   "chat": {
-    "kicker": "IA Interactive Explorer",
-    "title": "Pregúntame sobre Jefferson",
-    "description": "Respuestas técnicas estructuradas sobre arquitectura, decisiones de diseño y formación.",
-    "agentLabel": "kernel::ai_query_agent",
+    "kicker": "JeffBot",
+    "title": "¿Quieres saber más sobre mí y mis proyectos?",
+    "description": "Tu asistente para conocer la experiencia, los proyectos y el stack de Jefferson.",
+    "agentLabel": "JeffBot",
     "inputPlaceholder": "Escribe tu pregunta...",
     "send": "Enviar",
     "thinking": "Pensando...",
     "clear": "Limpiar conversación",
     "error": "No pude obtener una respuesta. Intenta de nuevo.",
-    "welcome": "Hola, soy el agente de consulta de Jefferson. Pregúntame sobre su stack, ObstetriCare, Amará o decisiones de arquitectura.",
+    "welcome": "Hola, soy JeffBot, el asistente virtual de Jefferson. Pregúntame sobre su stack, ObstetriCare, Amará o decisiones de arquitectura.",
     "suggestions": {
       "stack": "¿Qué tecnologías domina Jefferson en backend y frontend?",
       "obstetricare": "¿Cómo resolvió la predicción clínica en ObstetriCare?",
-      "amara": "¿Cuál es su experiencia con Supabase y Next.js en Amará?"
+      "amara": "¿Cuál es su experiencia con Supabase y Next.js en Amará?",
+      "about": "¿Cuál es el perfil profesional de Jefferson?",
+      "architecture": "¿Cómo diseña soluciones full-stack escalables?",
+      "career": "¿Qué tipo de retos profesionales busca Jefferson?",
+      "obstetriCarePipeline": "¿Cómo funciona el pipeline S-2, S-3 y S-4 de ObstetriCare?",
+      "obstetriCareSafety": "¿Qué medidas de seguridad y respaldo tiene ObstetriCare?",
+      "amaraProduct": "¿Qué funcionalidades de bienestar incluye Amará?",
+      "amaraSecurity": "¿Cómo protege Amará los datos de sus usuarios?",
+      "amaraArchitecture": "¿Cómo usa Amará Next.js, Supabase e IA?"
     }
   },
   "aboutPreview": {

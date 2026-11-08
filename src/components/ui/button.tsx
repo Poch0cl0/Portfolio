@@ -37,7 +37,7 @@ export function Button({
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 hover:scale-[1.04] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100",
+        "inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 hover:scale-[1.04] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100",
         variants[variant],
         sizes[size],
         className,
@@ -61,7 +61,7 @@ export function ButtonLink({
   return (
     <Link
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 hover:scale-[1.04] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100",
+        "inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 hover:scale-[1.04] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100",
         variants[variant],
         sizes[size],
         className,

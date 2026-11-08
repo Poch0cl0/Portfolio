@@ -1,12 +1,11 @@
 {
   "hero": {
-    "srTitle": "Jefferson Peña Serrano — Full-Stack Developer",
+    "name": "Jefferson Peña",
+    "role": "Full Stack Developer",
     "photoAlt": "Jefferson Peña Serrano, full-stack developer",
-    "kicker": "Systems & Software Engineering · {location} · Available for projects",
-    "description": "Systems Engineering student at {university}. I build modern full-stack applications combining clean architectures, performance, and solutions applied to clinical health and wellness.",
+    "description": "Systems Engineering student at Universidad Nacional de Trujillo, specializing in full-stack web development with Next.js, React, TypeScript, FastAPI, and PostgreSQL. I build applications that integrate Machine Learning and conversational AI to solve real problems.",
     "viewProjects": "View Featured Projects",
-    "contactMe": "Contact me",
-    "stackLabel": "Production Stack & Frameworks"
+    "contactMe": "Contact me"
   },
   "profileCard": {
     "terminalPath": "sys://engineer.kernel/profile",
@@ -81,20 +80,28 @@
     }
   },
   "chat": {
-    "kicker": "AI Interactive Explorer",
-    "title": "Ask me about Jefferson",
-    "description": "Structured technical answers about architecture, design decisions, and background.",
-    "agentLabel": "kernel::ai_query_agent",
+    "kicker": "JeffBot",
+    "title": "Want to know more about me and my projects?",
+    "description": "Your assistant for exploring Jefferson's experience, projects, and technical stack.",
+    "agentLabel": "JeffBot",
     "inputPlaceholder": "Type your question...",
     "send": "Send",
     "thinking": "Thinking...",
     "clear": "Clear conversation",
     "error": "Could not get a response. Please try again.",
-    "welcome": "Hi, I'm Jefferson's query agent. Ask me about his stack, ObstetriCare, Amará, or architecture decisions.",
+    "welcome": "Hi, I'm JeffBot, Jefferson's virtual assistant. Ask me about his stack, ObstetriCare, Amará, or architecture decisions.",
     "suggestions": {
       "stack": "What technologies does Jefferson master in backend and frontend?",
       "obstetricare": "How did he solve clinical prediction in ObstetriCare?",
-      "amara": "What is his experience with Supabase and Next.js in Amará?"
+      "amara": "What is his experience with Supabase and Next.js in Amará?",
+      "about": "What is Jefferson's professional profile?",
+      "architecture": "How does Jefferson design scalable full-stack solutions?",
+      "career": "What professional challenges is Jefferson looking for?",
+      "obstetriCarePipeline": "How does ObstetriCare's S-2, S-3, and S-4 pipeline work?",
+      "obstetriCareSafety": "What safety and fallback measures does ObstetriCare use?",
+      "amaraProduct": "What emotional-wellness features does Amará include?",
+      "amaraSecurity": "How does Amará protect user data?",
+      "amaraArchitecture": "How does Amará use Next.js, Supabase, and AI?"
     }
   },
   "aboutPreview": {

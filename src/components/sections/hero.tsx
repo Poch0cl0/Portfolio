@@ -1,29 +1,14 @@
 "use client";
 
-import { siteConfig } from "@/config/site";
 import { assets } from "@/config/assets";
-import { HeroProfileCard } from "@/components/sections/hero-profile-card";
+import { ChatAssistantSection } from "@/components/sections/chat-assistant-section";
 import { AssetImage } from "@/components/ui/asset-image";
 import { ButtonLink } from "@/components/ui/button";
 import { ContactTrigger } from "@/features/contact/components/contact-trigger";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
-import { Badge } from "@/components/ui/badge";
 import { useDictionary } from "@/i18n/dictionary-provider";
-
-const heroStack = [
-  "Next.js 16",
-  "React 19",
-  "TypeScript",
-  "FastAPI",
-  "Python 3.12",
-  "PostgreSQL 16",
-  "Supabase",
-  "Tailwind CSS",
-  "Gemini 2.0 Flash",
-  "GPT-4o-mini",
-];
 
 export function Hero() {
   const { dict } = useDictionary();
@@ -37,26 +22,24 @@ export function Hero() {
       <Container className="relative z-10">
         <div className="grid grid-cols-1 items-start gap-space-lg lg:grid-cols-12 lg:gap-12">
           <Reveal className="flex flex-col items-start gap-space-md lg:col-span-7">
-            <div className="inline-flex items-center gap-2 rounded-full bg-surface-container-high px-3 py-1.5 shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-80" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-              </span>
-              <span className="font-mono text-label-caps uppercase tracking-wider text-primary">
-                {dict.home.hero.kicker.replace("{location}", siteConfig.location)}
-              </span>
+            <div className="flex flex-col gap-1">
+              <h1 className="text-display text-on-surface">
+                {dict.home.hero.name}
+              </h1>
+              <p className="font-mono text-body-md font-medium uppercase tracking-wider text-primary">
+                {dict.home.hero.role}
+              </p>
             </div>
 
-            <h1 className="sr-only">{dict.home.hero.srTitle}</h1>
             <AssetImage
               assetKey="heroPortrait"
               alt={dict.home.hero.photoAlt}
               priority
-              className="aspect-[4/3] w-full max-w-2xl rounded-2xl object-cover"
+              className="aspect-[4/3] w-full rounded-2xl object-cover"
             />
 
-            <p className="max-w-xl text-body-lg text-on-surface-variant">
-              {dict.home.hero.description.replace("{university}", siteConfig.university)}
+            <p className="w-full text-body-lg text-on-surface-variant">
+              {dict.home.hero.description}
             </p>
 
             <div className="flex w-full flex-wrap items-center gap-space-sm pt-2 sm:w-auto">
@@ -76,27 +59,10 @@ export function Hero() {
                 {dict.common.downloadCv}
               </ButtonLink>
             </div>
-
-            <div className="flex w-full flex-col gap-2 pt-space-sm">
-              <span className="font-mono text-label-caps uppercase tracking-widest text-outline">
-                {dict.home.hero.stackLabel}
-              </span>
-              <div className="flex flex-wrap items-center gap-1.5">
-                {heroStack.map((tech) => (
-                  <Badge
-                    key={tech}
-                    variant="tech"
-                    className="transition-transform duration-200 hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100"
-                  >
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
-            </div>
           </Reveal>
 
           <div className="w-full lg:col-span-5">
-            <HeroProfileCard />
+            <ChatAssistantSection embedded />
           </div>
         </div>
       </Container>

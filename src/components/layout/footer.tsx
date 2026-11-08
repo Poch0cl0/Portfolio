@@ -7,6 +7,7 @@ import { sectionHref, sectionNavigation } from "@/config/navigation";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Container } from "@/components/ui/container";
 import { useDictionary } from "@/i18n/dictionary-provider";
+import { GitHubIcon, LinkedInIcon } from "@/components/ui/social-icons";
 
 export function Footer() {
   const { dict } = useDictionary();
@@ -55,12 +56,26 @@ export function Footer() {
               <CopyButton value={siteConfig.email} label="" copiedLabel="" />
             </div>
             <div className="flex flex-wrap gap-space-xs pt-space-xs">
-              <span className="inline-flex items-center gap-1 rounded bg-surface-container px-space-sm py-1 text-label-sm">
-                {dict.common.footer.githubTodo}
-              </span>
-              <span className="inline-flex items-center gap-1 rounded bg-surface-container px-space-sm py-1 text-label-sm">
-                {dict.common.footer.linkedinTodo}
-              </span>
+              <a
+                href={siteConfig.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={dict.common.footer.github}
+                title={dict.common.footer.github}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-surface-container text-on-surface transition-all duration-200 hover:scale-105 hover:bg-on-surface hover:text-surface focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+              >
+                <GitHubIcon className="h-4 w-4" />
+              </a>
+              <a
+                href={siteConfig.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={dict.common.footer.linkedin}
+                title={dict.common.footer.linkedin}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#0A66C2] text-white transition-all duration-200 hover:scale-105 hover:bg-[#004182] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+              >
+                <LinkedInIcon className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </div>

@@ -7,8 +7,8 @@
   "footer": {
     "navigation": "Navegación",
     "directContact": "Comunicación directa",
-    "githubTodo": "GitHub: TODO",
-    "linkedinTodo": "LinkedIn: TODO",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
     "builtWith": "Built with Next.js 16, TypeScript & Tailwind CSS | Deployed on Vercel",
     "copyright": "All architectural rights reserved.",
     "description": "Desarrollador Full-Stack en {location}. Formado en la {university}. Construyendo software robusto, escalable y con foco clínico-tecnológico."

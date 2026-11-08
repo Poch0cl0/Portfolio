@@ -14,7 +14,7 @@ export function ProjectShowcase({ project }: ProjectShowcaseProps) {
     >
       <div className="grid grid-cols-1 gap-0 lg:grid-cols-12">
         <div className="relative min-h-[280px] overflow-hidden lg:col-span-5 lg:min-h-[420px]">
-          <ProjectMedia slug={project.slug} className="absolute inset-0 h-full min-h-0" />
+          <ProjectMedia slug={project.slug} variant="card" className="absolute inset-0 h-full min-h-0" />
         </div>
         <div className="lg:col-span-7">
           <ProjectShowcaseContent project={project} />

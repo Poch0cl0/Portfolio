@@ -1,10 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { CheckCircle2, Puzzle } from "lucide-react";
-import { getStackEvidence, getStackItems, stackTabMap } from "@/data/stack";
+import { useState } from "react";
+import { Puzzle, RotateCw } from "lucide-react";
+import type { Stack } from "@/types/stack";
+import { getStackItems, stackTabMap } from "@/data/stack";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { TechnologyLogo } from "@/components/ui/technology-logo";
 import {
   Section,
   SectionDescription,
@@ -15,20 +17,14 @@ import {
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { cn } from "@/lib/utils";
 
-const tabIds = ["all", "frontend", "backend", "databases", "aiml", "devops", "testing"] as const;
+const tabIds = ["frontend", "backend", "databases", "aiml", "devops", "testing"] as const;
 
 export function StackPreview() {
   const { dict } = useDictionary();
   const stackItems = getStackItems(dict);
-  const [activeTab, setActiveTab] = useState<(typeof tabIds)[number]>("all");
+  const [activeTab, setActiveTab] = useState<(typeof tabIds)[number]>("frontend");
 
-  const filteredItems = useMemo(() => {
-    const category = stackTabMap[activeTab];
-    if (category === "all") {
-      return stackItems;
-    }
-    return stackItems.filter((item) => item.category === category);
-  }, [activeTab, stackItems]);
+  const filteredItems = stackItems.filter((item) => item.category === stackTabMap[activeTab]);
 
   return (
     <Section id="stack" className="scroll-mt-24">
@@ -51,6 +47,7 @@ export function StackPreview() {
                 key={tabId}
                 type="button"
                 onClick={() => setActiveTab(tabId)}
+                aria-pressed={activeTab === tabId}
                 className={cn(
                   "rounded-lg px-3 py-1.5 font-mono text-code-inline transition-all duration-200 hover:scale-105 hover:glow-hover-secondary motion-reduce:transition-none motion-reduce:hover:scale-100",
                   activeTab === tabId
@@ -59,36 +56,55 @@ export function StackPreview() {
                 )}
               >
                 {dict.home.stackPreview.tabs[tabId]} (
-                {tabId === "all" ? stackItems.length : filteredItems.length})
+                {stackItems.filter((item) => item.category === stackTabMap[tabId]).length})
               </button>
             ))}
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-space-md sm:grid-cols-2 lg:grid-cols-4">
-          {filteredItems.map((item, index) => (
-            <Reveal key={`${item.category}-${item.name}`} className={index > 0 ? `[animation-delay:${(index % 4) * 60}ms]` : undefined}>
-              <div className="flex h-full flex-col justify-between gap-space-sm rounded-xl border border-transparent bg-surface-container-low p-space-md shadow-sm transition-all duration-200 hover:glow-hover-primary hover:-translate-y-1 hover:shadow-2xl motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-                <div className="flex flex-col gap-1">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-code-block font-semibold text-primary">
-                      {item.name}
-                    </span>
-                    <span className="font-mono text-label-caps text-outline">
-                      {(dict.stack.categories[item.category] ?? item.category).toUpperCase()}
-                    </span>
-                  </div>
-                  <p className="text-body-sm text-on-surface-variant">{item.description}</p>
-                </div>
-                <div className="flex items-center gap-1 text-label-sm text-outline">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
-                  <span>{getStackEvidence(item, dict)}</span>
-                </div>
-              </div>
-            </Reveal>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {filteredItems.map((item) => (
+            <Reveal key={`${item.category}-${item.name}`} className="h-full min-w-0">
+              <TechnologyCard item={item} />            </Reveal>
           ))}
         </div>
       </Container>
     </Section>
+  );
+}
+
+function TechnologyCard({ item }: { item: Stack }) {
+  const { dict } = useDictionary();
+  const [flipped, setFlipped] = useState(false);
+  const { flip, back } = dict.stack.cards;
+
+  return (
+    <button type="button" aria-label={`${item.name}: ${flipped ? back : flip}`} aria-pressed={flipped}
+      onClick={() => setFlipped((value) => !value)}
+      className="technology-card h-full w-full rounded-2xl text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+      <span className="technology-card-inner" data-flipped={flipped}>
+        <span className="technology-card-face border border-outline-variant/40 bg-surface-container-low shadow-sm" aria-hidden={flipped}>
+          <span className="flex items-center justify-between gap-3">
+            <TechnologyLogo item={item} />
+            <span className="font-mono text-label-sm text-outline">{dict.stack.categories[item.category]}</span>
+          </span>
+          <span className="mt-5 block break-words font-mono text-xl font-semibold text-on-surface">{item.name}</span>
+          <span className="mt-2 block text-body-sm text-on-surface-variant">{item.usedIn.map((slug) => dict.projects[slug].title).join(" · ")}</span>
+          <span className="mt-auto flex items-center gap-2 pt-6 text-body-sm text-primary"><RotateCw size={16} aria-hidden="true" />{flip}</span>
+        </span>
+        <span className="technology-card-face technology-card-back border border-primary/40 bg-surface-container-high shadow-sm" aria-hidden={!flipped}>
+          <span className="flex items-center justify-between gap-3 font-mono text-body-sm font-semibold text-primary">{item.name}<RotateCw size={18} aria-hidden="true" /></span>
+          <span className="mt-4 flex flex-col gap-4">
+            {item.usedIn.map((slug) => (
+              <span key={slug} className="block">
+                <span className="block text-body-sm font-semibold text-on-surface">{dict.projects[slug].title}</span>
+                <span className="mt-1 block text-body-sm text-on-surface-variant">{dict.stack.projectUsage[item.name as keyof typeof dict.stack.projectUsage]?.[slug] ?? item.description}</span>
+              </span>
+            ))}
+          </span>
+          <span className="mt-auto block pt-5 text-body-sm text-primary">{back}</span>
+        </span>
+      </span>
+    </button>
   );
 }

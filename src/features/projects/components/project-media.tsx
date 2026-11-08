@@ -10,27 +10,36 @@ const coverBySlug: Record<ProjectSlug, AssetKey> = {
   obstetricare: "obstetricareCover",
   amara: "amaraCover",
 };
+const cardCoverBySlug: Record<ProjectSlug, AssetKey> = {
+  obstetricare: "obstetricareCardCover",
+  amara: "amaraCardCover",
+};
 
 interface ProjectMediaProps {
   slug: ProjectSlug;
   className?: string;
+  variant?: "card" | "detail";
 }
 
-export function ProjectMedia({ slug, className }: ProjectMediaProps) {
-  const assetKey = coverBySlug[slug];
+export function ProjectMedia({ slug, className, variant = "detail" }: ProjectMediaProps) {
+  const assetKey = variant === "card" ? cardCoverBySlug[slug] : coverBySlug[slug];
   const entry = getAssetEntry(assetKey);
 
   if (entry.ready) {
     return (
-      <div className={cn("relative min-h-[280px] overflow-hidden lg:min-h-full", className)}>
+      <div className={cn(
+        "relative min-h-[280px] overflow-hidden lg:min-h-full",
+        slug === "amara" ? "bg-[#F5E6E6]" : "bg-[#F9CFD9]",
+        className,
+      )}>
         <Image
           src={getAssetUrl(assetKey)}
           alt={entry.label}
           fill
+          sizes="(min-width: 1024px) 42vw, 100vw"
           unoptimized
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+          className={variant === "card" ? "object-cover object-center" : "object-contain object-center"}
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent" />
       </div>
     );
   }
