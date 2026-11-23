@@ -1,39 +1,44 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 
-export function useActiveSection(sectionIds: readonly string[]): string | null {
-  const [activeId, setActiveId] = useState<string | null>(sectionIds[0] ?? null);
+export function useActiveSection(sectionIds: readonly string[], pathname: string) {
+  const [activeId, setActiveId] = useState("home");
+  const [compact, setCompact] = useState(false);
 
   useEffect(() => {
-    const elements = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((element): element is HTMLElement => element !== null);
+    const sections = sectionIds.map((id) => document.getElementById(id));
+    let frame = 0;
 
-    if (elements.length === 0) {
-      return;
+    function update() {
+      const scrollY = window.scrollY;
+      setCompact(scrollY > 32);
+      const readingLine = Math.max(112, window.innerHeight * 0.22);
+      let current = "home";
+      if (scrollY > 8) {
+        sections.forEach((section) => {
+          if (section && section.getBoundingClientRect().top <= readingLine) {
+            current = section.id;
+          }
+        });
+      }
+      setActiveId(current);
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    function scheduleUpdate() {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    }
 
-        if (visible[0]) {
-          setActiveId(visible[0].target.id);
-        }
-      },
-      {
-        rootMargin: "-20% 0px -55% 0px",
-        threshold: [0, 0.15, 0.35, 0.55, 0.75, 1],
-      },
-    );
+    update();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, [sectionIds, pathname]);
 
-    elements.forEach((element) => observer.observe(element));
-
-    return () => observer.disconnect();
-  }, [sectionIds]);
-
-  return activeId;
+  return { activeId, compact };
 }

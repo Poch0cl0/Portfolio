@@ -1,0 +1,201 @@
+﻿.chat {
+  min-width: 0;
+  border: 1px solid var(--portfolio-border);
+  background: var(--portfolio-surface);
+  font-size: .875rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  padding: .7rem .85rem;
+  background: var(--portfolio-primary);
+  color: var(--portfolio-primary-foreground);
+}
+
+.header h2 {
+  font: 750 1rem var(--font-portfolio-manrope), sans-serif;
+}
+
+.header p {
+  font-size: .8rem;
+}
+
+.header button {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  min-height: 2rem;
+  margin-inline-start: auto;
+  padding: .25rem .45rem;
+}
+
+.header button:focus-visible {
+  outline-color: var(--portfolio-primary-foreground);
+}
+
+.log {
+  display: flex;
+  flex-direction: column;
+  gap: .65rem;
+  padding: .8rem;
+  min-height: 11.5rem;
+  max-height: 18rem;
+  overflow-y: auto;
+  overflow-anchor: none;
+  overscroll-behavior: contain;
+  background: var(--portfolio-background);
+}
+
+.agent {
+  display: flex;
+  align-items: flex-start;
+  gap: .55rem;
+  max-width: 96%;
+}
+
+.badge {
+  display: grid;
+  place-items: center;
+  min-width: 1.65rem;
+  height: 1.65rem;
+  margin-top: .1rem;
+  background: var(--portfolio-primary);
+  color: var(--portfolio-primary-foreground);
+  font-size: .65rem;
+  font-weight: 750;
+}
+
+.bubble, .user {
+  padding: .55rem .65rem;
+  overflow-wrap: anywhere;
+  line-height: 1.55;
+}
+
+.bubble {
+  min-width: 0;
+  border: 1px solid var(--portfolio-border);
+  background: var(--portfolio-surface);
+}
+
+.user {
+  align-self: flex-end;
+  max-width: 88%;
+  background: var(--portfolio-surface-secondary);
+  border: 1px solid var(--portfolio-border);
+}
+
+.suggestions, .composer {
+  border-top: 1px solid var(--portfolio-border);
+  padding: .65rem;
+}
+
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+
+.suggestions button {
+  min-height: 2.1rem;
+  border: 1px solid var(--portfolio-border);
+  border-radius: 2rem;
+  padding: .25rem .6rem;
+  background: var(--portfolio-background);
+  color: var(--portfolio-muted-foreground);
+  font-size: .8rem;
+  text-align: start;
+}
+
+@media (hover: hover) {
+  .suggestions button:hover:enabled {
+    border-color: var(--portfolio-accent);
+    background: var(--portfolio-surface-secondary);
+    color: var(--portfolio-foreground);
+  }
+}
+
+.suggestions button:active:enabled {
+  border-color: var(--portfolio-foreground);
+  background: var(--portfolio-surface-secondary);
+  color: var(--portfolio-foreground);
+}
+
+.composer {
+  display: flex;
+  gap: .4rem;
+}
+
+.composer input {
+  flex: 1;
+  min-width: 0;
+  min-height: 2.55rem;
+  border: 1px solid var(--portfolio-border);
+  padding: .45rem .6rem;
+  background: var(--portfolio-surface);
+  color: var(--portfolio-foreground);
+  font-size: 1rem;
+}
+
+.composer input::placeholder {
+  color: var(--portfolio-muted-foreground);
+}
+
+.composer button {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .4rem .6rem;
+  background: var(--portfolio-primary);
+  color: var(--portfolio-primary-foreground);
+  font-weight: 650;
+}
+
+.chat button:disabled {
+  opacity: .58;
+}
+
+.error {
+  padding: .45rem .65rem;
+  color: var(--error);
+}
+
+.typing {
+  display: flex;
+  gap: .25rem;
+  padding: .55rem;
+}
+
+.typing span {
+  width: .35rem;
+  height: .35rem;
+  border-radius: 50%;
+  background: var(--portfolio-muted-foreground);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :is(.agent, .user)[data-enter] {
+    animation: message-in var(--motion-duration-normal) var(--motion-ease-enter) backwards;
+  }
+
+  .typing span {
+    animation: typing 900ms ease-in-out infinite alternate;
+  }
+
+  .typing span:nth-child(2) { animation-delay: 130ms; }
+  .typing span:nth-child(3) { animation-delay: 260ms; }
+}
+
+@keyframes message-in {
+  from { opacity: 0; translate: 0 calc(var(--motion-distance-enter) / 2); }
+}
+
+@keyframes typing {
+  to { opacity: .45; transform: translateY(-.18rem); }
+}
+
+.log:focus-visible {
+  outline: 2px solid var(--portfolio-foreground);
+  outline-offset: -2px;
+}

@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import type { Locale } from "@/i18n/config";
 
 export function SetHtmlLang({ locale }: { locale: Locale }) {
-  useEffect(() => {
-    document.documentElement.lang = locale;
+  // The shared root stays mounted during localized client navigations.
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    if (root.lang !== locale) root.lang = locale;
   }, [locale]);
 
   return null;

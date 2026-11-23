@@ -1,11 +1,16 @@
 {
   "hero": {
-    "name": "Jefferson Peña",
-    "role": "Desarrollador Full Stack",
     "photoAlt": "Jefferson Peña Serrano, desarrollador full-stack",
-    "description": "Estudiante de Ingeniería de Sistemas en la Universidad Nacional de Trujillo, especializado en desarrollo web full-stack con Next.js, React, TypeScript, FastAPI y PostgreSQL. Desarrollo aplicaciones que integran Machine Learning e IA conversacional para resolver problemas reales.",
-    "viewProjects": "Ver Proyectos Destacados",
-    "contactMe": "Contactarme"
+    "headline": "Transformo ideas en",
+    "headlineAccent": "software que genera impacto.",
+    "description": "Soy Jefferson Peña, desarrollador Full-Stack y estudiante de Ingeniería de Sistemas en la Universidad Nacional de Trujillo. Diseño y desarrollo aplicaciones web completas, integrando frontend, backend e inteligencia artificial para resolver necesidades reales.",
+    "viewProjects": "Explorar proyectos",
+    "downloadCv": "Descargar CV",
+    "profileLabel": "Perfil y asistente",
+    "projectSummaries": {
+      "obstetricare": "Sistema de apoyo a la detección temprana de riesgos de parto prematuro mediante Machine Learning.",
+      "amara": "Plataforma web de bienestar emocional con seguimiento de hábitos y asistencia conversacional."
+    }
   },
   "profileCard": {
     "terminalPath": "sys://engineer.kernel/profile",
@@ -89,9 +94,9 @@
     "thinking": "Pensando...",
     "clear": "Limpiar conversación",
     "error": "No pude obtener una respuesta. Intenta de nuevo.",
-    "welcome": "Hola, soy JeffBot, el asistente virtual de Jefferson. Pregúntame sobre su stack, ObstetriCare, Amará o decisiones de arquitectura.",
+    "welcome": "¡Hola! Soy **JeffBot**. Puedo ayudarte a conocer los proyectos, tecnologías y formación de Jefferson. ¿Qué te gustaría saber?",
     "suggestions": {
-      "stack": "¿Qué tecnologías domina Jefferson en backend y frontend?",
+      "stack": "¿Qué tecnologías utiliza?",
       "obstetricare": "¿Cómo resolvió la predicción clínica en ObstetriCare?",
       "amara": "¿Cuál es su experiencia con Supabase y Next.js en Amará?",
       "about": "¿Cuál es el perfil profesional de Jefferson?",
@@ -101,8 +106,13 @@
       "obstetriCareSafety": "¿Qué medidas de seguridad y respaldo tiene ObstetriCare?",
       "amaraProduct": "¿Qué funcionalidades de bienestar incluye Amará?",
       "amaraSecurity": "¿Cómo protege Amará los datos de sus usuarios?",
-      "amaraArchitecture": "¿Cómo usa Amará Next.js, Supabase e IA?"
-    }
+      "amaraArchitecture": "¿Cómo usa Amará Next.js, Supabase e IA?",
+      "projects": "¿Cuáles son sus proyectos?",
+      "education": "¿Qué está estudiando?",
+      "contact": "¿Cómo puedo contactarlo?"
+    },
+    "subtitle": "Asistente del portafolio",
+    "typing": "JeffBot está escribiendo"
   },
   "aboutPreview": {
     "title": "Sobre mí",

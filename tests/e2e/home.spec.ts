@@ -57,26 +57,71 @@ test("failed technology logos keep a styled fallback", async ({ page }) => {
   }
 });
 
-for (const width of [375, 768, 1440]) {
-  test(`profile image and description share width at ${width}px`, async ({ page }) => {
+for (const width of [320, 768, 1440]) {
+  test(`hero places the original portrait and JeffBot at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 1000 });
     await page.goto("/es");
-    const hero = page.locator("#sobre-mi");
-    const image = await hero.getByRole("img").first().boundingBox();
-    const description = await hero.getByText("Estudiante de Ingeniería de Sistemas", { exact: false }).boundingBox();
-    expect(image).not.toBeNull();
-    expect(description).not.toBeNull();
-    expect(Math.abs(image!.width - description!.width)).toBeLessThanOrEqual(1);
-    expect(Math.abs(image!.x - description!.x)).toBeLessThanOrEqual(1);
+
+    const intro = page.locator("#sobre-mi");
+    const sidebar = page.getByRole("complementary").filter({ has: page.getByRole("heading", { name: "JeffBot" }) });
+    const image = sidebar.getByRole("img");
+    const chat = sidebar.getByRole("region", { name: "JeffBot" });
+
+    await expect(image).toHaveAttribute("src", /jefferson-hero\.webp/);
+    await expect.poll(() => image.evaluate((img) => (img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    const portrait = (await image.boundingBox())!;
+    const text = (await intro.boundingBox())!;
+    const assistant = (await chat.boundingBox())!;
+
+    expect(Math.abs(portrait.width / portrait.height - 686 / 555)).toBeLessThan(0.02);
+    expect(assistant.y).toBeGreaterThan(portrait.y + portrait.height);
+    if (width >= 1024) {
+      expect(portrait.x).toBeGreaterThan(text.x + text.width);
+    } else {
+      expect(portrait.y).toBeGreaterThan(text.y + text.height);
+    }
   });
 }
 
 test("home page presents Jefferson in Spanish", async ({ page }) => {
   await page.goto("/es");
-  await expect(page.getByRole("heading", { name: "Jefferson Peña" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Transformo ideas en software que genera impacto." })).toBeVisible();
 });
 
 test("root redirects to a locale", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveURL(/\/(es|en)$/);
+});
+
+test("switching languages preserves the selected technology category and flipped cards", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/es#stack");
+  const stack = page.locator("#stack");
+  const backend = stack.getByRole("button", { name: /^Backend/ });
+  await backend.click();
+
+  const fastApi = stack.getByRole("button", { name: /^FastAPI:/ });
+  const python = stack.getByRole("button", { name: /^Python 3\.12:/ });
+  await fastApi.click();
+  await python.click();
+
+  await page.evaluate(() => { document.documentElement.dataset.localeTest = "same-document"; });
+
+  const header = page.getByRole("banner");
+  await header.getByRole("button", { name: "EN", exact: true }).click();
+  await expect(page).toHaveURL(/\/en#stack$/);
+  await expect(page.locator("html")).toHaveAttribute("data-locale-test", "same-document");
+  await expect(backend).toHaveAttribute("aria-pressed", "true");
+  await expect(fastApi).toHaveAttribute("aria-pressed", "true");
+  await expect(python).toHaveAttribute("aria-pressed", "true");
+  await expect(fastApi).toHaveAccessibleName(/Back to technology/);
+
+  await fastApi.click();
+  await header.getByRole("button", { name: "ES", exact: true }).click();
+  await expect(page).toHaveURL(/\/es#stack$/);
+  await expect(backend).toHaveAttribute("aria-pressed", "true");
+  await expect(fastApi).toHaveAttribute("aria-pressed", "false");
+  await expect(python).toHaveAttribute("aria-pressed", "true");
+  expect(errors).toEqual([]);
 });

@@ -4,8 +4,8 @@ import { ArrowRight, ListVideo } from "lucide-react";
 import { getFeaturedProjects } from "@/data/projects";
 import { ProjectShowcase } from "@/features/projects/components/project-showcase";
 import { ContactTrigger } from "@/features/contact/components/contact-trigger";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 import {
   Section,
   SectionKicker,
@@ -20,7 +20,7 @@ export function FeaturedProjects() {
   return (
     <Section id="proyectos-destacados" className="scroll-mt-24">
       <Container className="flex flex-col gap-space-xl">
-        <Reveal>
+        <ScrollReveal id="projects-heading">
           <div className="flex flex-col justify-between gap-space-sm md:flex-row md:items-end">
             <div className="flex flex-col gap-1">
               <SectionKicker className="text-secondary">
@@ -37,13 +37,13 @@ export function FeaturedProjects() {
               <ArrowRight className="h-4 w-4" />
             </ContactTrigger>
           </div>
-        </Reveal>
+        </ScrollReveal>
 
         <div className="flex flex-col gap-space-xl">
           {featuredProjects.map((project, index) => (
-            <Reveal key={project.slug} className={index > 0 ? `[animation-delay:${index * 100}ms]` : undefined}>
+            <ScrollReveal key={project.slug} id={project.slug} delay={index * 100}>
               <ProjectShowcase project={project} />
-            </Reveal>
+            </ScrollReveal>
           ))}
         </div>
       </Container>

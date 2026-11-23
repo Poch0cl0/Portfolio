@@ -1,31 +1,29 @@
-"use client";
+﻿"use client";
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/components/providers/theme-provider";
-import { Button } from "@/components/ui/button";
-import { useMounted } from "@/hooks/use-mounted";
+import { useDictionary } from "@/i18n/dictionary-provider";
+import styles from "@/components/layout/navbar.module.css";
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
-  const mounted = useMounted();
-
-  if (!mounted) {
-    return (
-      <Button variant="ghost" size="sm" aria-label="Cambiar tema" disabled className="p-1.5" />
-    );
-  }
-
+  const { dict } = useDictionary();
   const isDark = resolvedTheme === "dark";
 
   return (
-    <Button
-      variant="ghost"
-      size="sm"
-      aria-label="Cambiar tema"
-      className="p-1.5"
+    <button
+      type="button"
+      role="switch"
+      aria-checked={isDark}
+      aria-label={dict.common.header.darkMode}
+      className={`${styles.themeSwitch} motion-transition-colors`}
       onClick={() => setTheme(isDark ? "light" : "dark")}
     >
-      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-    </Button>
+      <span className={styles.themeScenery} aria-hidden="true" />
+      <span className={styles.themeThumb} aria-hidden="true">
+        <Sun className={styles.sun} size={17} />
+        <Moon className={styles.moon} size={16} />
+      </span>
+    </button>
   );
 }

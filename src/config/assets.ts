@@ -18,8 +18,8 @@ export const assets = {
   },
   heroPortrait: {
     src: "/images/hero/jefferson-hero.webp",
-    width: 1600,
-    height: 1200,
+    width: 686,
+    height: 555,
     ready: true,
     label: "Foto del hero",
   },

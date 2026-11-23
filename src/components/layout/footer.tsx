@@ -72,7 +72,7 @@ export function Footer() {
                 rel="noreferrer"
                 aria-label={dict.common.footer.linkedin}
                 title={dict.common.footer.linkedin}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#0A66C2] text-white transition-all duration-200 hover:scale-105 hover:bg-[#004182] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-on-primary transition-all duration-200 hover:scale-105 hover:bg-surface-container-high hover:text-on-surface focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
               >
                 <LinkedInIcon className="h-4 w-4" />
               </a>

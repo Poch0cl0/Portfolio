@@ -29,7 +29,7 @@ export function ProjectMedia({ slug, className, variant = "detail" }: ProjectMed
     return (
       <div className={cn(
         "relative min-h-[280px] overflow-hidden lg:min-h-full",
-        slug === "amara" ? "bg-[#F5E6E6]" : "bg-[#F9CFD9]",
+        "bg-surface-container",
         className,
       )}>
         <Image

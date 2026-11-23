@@ -4,6 +4,16 @@
     "about": "Sobre mí",
     "stack": "Stack"
   },
+  "header": {
+    "home": "Inicio",
+    "technologies": "Tecnologías",
+    "contact": "Contacto",
+    "navigation": "Navegación principal",
+    "language": "Idioma",
+    "darkMode": "Modo oscuro",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
   "footer": {
     "navigation": "Navegación",
     "directContact": "Comunicación directa",

@@ -1,0 +1,283 @@
+.hero {
+  background: var(--portfolio-background);
+  color: var(--portfolio-foreground);
+  font-family: var(--font-portfolio-inter), sans-serif;
+  padding: clamp(2rem, 3.6vw, 3.5rem) 0 clamp(3rem, 7vw, 6rem);
+  transition:
+    background-color var(--motion-duration-normal) var(--motion-ease-interaction),
+    color var(--motion-duration-normal) var(--motion-ease-interaction);
+}
+
+.container {
+  padding-inline: var(--portfolio-page-gutter);
+}
+
+.projects strong::before {
+  display: inline-block;
+  flex: none;
+  width: .45rem;
+  height: .45rem;
+  background: var(--portfolio-accent);
+  content: "";
+}
+
+.layout {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.intro {
+  min-width: 0;
+  scroll-margin-top: 6rem;
+}
+
+.intro h1 {
+  margin: 0 0 1.4rem;
+  max-width: 15ch;
+  font: 800 clamp(2.4rem, 5.45vw, 5.15rem)/1.035 var(--font-portfolio-manrope), sans-serif;
+  letter-spacing: -.06em;
+  text-wrap: balance;
+}
+
+.intro h1 :is(span, em) {
+  display: block;
+}
+
+.intro h1 em {
+  --motion-delay: 125ms;
+  color: var(--portfolio-accent);
+  font-weight: 650;
+}
+
+.description {
+  --motion-delay: 260ms;
+  max-width: 64ch;
+  color: var(--portfolio-muted-foreground);
+  font-size: clamp(1rem, 1.35vw, 1.19rem);
+  line-height: 1.75;
+}
+
+.actions, .socials {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .65rem;
+}
+
+.actions {
+  margin-block: 1.65rem 2.5rem;
+  gap: .8rem;
+}
+
+.actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: 2.8rem;
+  border: 1px solid var(--portfolio-border);
+  border-radius: .18rem;
+  background: var(--portfolio-surface);
+  font-size: .875rem;
+  font-weight: 650;
+  padding: .55rem .95rem;
+}
+
+.actions .primary {
+  background: var(--portfolio-primary);
+  border-color: var(--portfolio-primary);
+  color: var(--portfolio-primary-foreground);
+}
+
+.secondary svg {
+  color: var(--portfolio-accent);
+}
+
+.socials a {
+  min-width: 2.8rem;
+  padding-inline: .55rem;
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 1rem;
+  padding-top: 1.55rem;
+  border-top: 1px solid var(--portfolio-border);
+}
+
+.projects li {
+  --motion-delay: 420ms;
+  display: flex;
+  min-width: 0;
+}
+
+.projects li + li {
+  --motion-delay: 550ms;
+}
+
+.projects a {
+  width: 100%;
+  border: 1px solid var(--portfolio-border);
+  background: var(--portfolio-surface);
+  padding: .85rem 1rem;
+}
+
+.projects strong {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: .25rem;
+  font-family: var(--font-portfolio-manrope), sans-serif;
+}
+
+.projects span {
+  display: block;
+  padding-inline-start: 1.05rem;
+  color: var(--portfolio-muted-foreground);
+  font-size: .875rem;
+  line-height: 1.55;
+}
+
+@media (hover: hover) {
+  .actions a:hover {
+    border-color: var(--portfolio-accent);
+    background: var(--portfolio-surface-secondary);
+  }
+
+  .actions .primary:hover {
+    background: color-mix(in srgb, var(--portfolio-primary) 90%, var(--portfolio-primary-foreground));
+  }
+
+  .projects a:hover {
+    border-color: var(--portfolio-accent);
+  }
+}
+
+.actions a:active,
+.projects a:active {
+  border-color: var(--portfolio-foreground);
+}
+
+.actions a:active,
+.actions .primary:active,
+.projects a:active {
+  background: var(--portfolio-surface-secondary);
+  color: var(--portfolio-foreground);
+}
+
+.hero :is(a, button, input):focus-visible {
+  outline: 2px solid var(--portfolio-foreground);
+  outline-offset: 2px;
+}
+
+.sidebar {
+  display: grid;
+  min-width: 0;
+  gap: 1.25rem;
+}
+
+.portrait {
+  position: relative;
+  padding: clamp(.45rem, .95vw, .8rem);
+  background: var(--portfolio-surface);
+  border: 1px solid var(--portfolio-border);
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--portfolio-surface-secondary);
+}
+
+.portrait figcaption {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  position: absolute;
+  inset: auto auto 1rem 1rem;
+  max-width: calc(100% - 2rem);
+  padding: .4rem .65rem;
+  border: 1px solid var(--portfolio-border);
+  background: var(--portfolio-surface);
+  font-size: .6875rem;
+}
+
+@media (min-width: 64rem) {
+  .layout {
+    grid-template-columns: minmax(0, 1.43fr) minmax(0, 1fr);
+  }
+}
+
+.assistant {
+  --motion-delay: 550ms;
+  min-width: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .actions a,
+  .projects a {
+    transition:
+      background-color var(--motion-duration-fast) var(--motion-ease-interaction),
+      border-color var(--motion-duration-fast) var(--motion-ease-interaction),
+      color var(--motion-duration-fast) var(--motion-ease-interaction),
+      translate var(--motion-duration-normal) var(--motion-ease-enter);
+  }
+
+  .actions a svg {
+    transition: translate var(--motion-duration-fast) var(--motion-ease-enter);
+  }
+
+  .actions a:active,
+  .projects a:active {
+    translate: 0 1px;
+  }
+
+  .hero:not([data-presentation="skip"]) .portrait::after {
+    position: absolute;
+    inset: -1px;
+    border: 1px solid var(--portfolio-accent);
+    pointer-events: none;
+    content: "";
+    opacity: 0;
+    animation: portrait-frame 700ms var(--motion-ease-enter) 80ms backwards;
+  }
+
+  @keyframes portrait-frame {
+    from {
+      opacity: .85;
+      transform: scaleX(.97) scaleY(.94);
+    }
+
+    to {
+      opacity: 0;
+      transform: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .actions a:hover:not(:active) {
+    translate: 0 -2px;
+  }
+
+  .actions a:hover svg {
+    translate: 2px 0;
+  }
+}
+
+.hero[data-presentation="skip"] :global(.motion-enter),
+:is(.projects li, .assistant)[data-interacted] {
+  animation: none;
+}
+
+:is(.projects li, .assistant):focus-within {
+  animation-delay: 0ms;
+  animation-duration: 0ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero { transition: none; }
+}

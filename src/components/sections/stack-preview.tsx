@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { Puzzle, RotateCw } from "lucide-react";
 import type { Stack } from "@/types/stack";
 import { getStackItems, stackTabMap } from "@/data/stack";
+import { stackTabIds, useStackPreview } from "@/hooks/use-stack-preview";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 import { TechnologyLogo } from "@/components/ui/technology-logo";
 import {
   Section,
@@ -17,19 +17,17 @@ import {
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { cn } from "@/lib/utils";
 
-const tabIds = ["frontend", "backend", "databases", "aiml", "devops", "testing"] as const;
-
 export function StackPreview() {
   const { dict } = useDictionary();
   const stackItems = getStackItems(dict);
-  const [activeTab, setActiveTab] = useState<(typeof tabIds)[number]>("frontend");
+  const { activeTab, setActiveTab, flippedCards, toggleCard } = useStackPreview();
 
   const filteredItems = stackItems.filter((item) => item.category === stackTabMap[activeTab]);
 
   return (
     <Section id="stack" className="scroll-mt-24">
       <Container>
-        <Reveal>
+        <ScrollReveal id="stack-heading">
           <SectionHeader>
             <SectionKicker>
               <Puzzle className="h-4 w-4" />
@@ -38,11 +36,11 @@ export function StackPreview() {
             <SectionTitle>{dict.home.stackPreview.title}</SectionTitle>
             <SectionDescription>{dict.home.stackPreview.description}</SectionDescription>
           </SectionHeader>
-        </Reveal>
+        </ScrollReveal>
 
-        <Reveal>
+        <div>
           <div className="mb-8 flex flex-wrap gap-2 pb-2">
-            {tabIds.map((tabId) => (
+            {stackTabIds.map((tabId) => (
               <button
                 key={tabId}
                 type="button"
@@ -60,27 +58,35 @@ export function StackPreview() {
               </button>
             ))}
           </div>
-        </Reveal>
-
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredItems.map((item) => (
-            <Reveal key={`${item.category}-${item.name}`} className="h-full min-w-0">
-              <TechnologyCard item={item} />            </Reveal>
-          ))}
         </div>
+
+        <ScrollReveal id="stack-grid" className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+          {filteredItems.map((item) => {
+            const id = `${item.category}-${item.name}`;
+
+            return (
+              <div key={id} className="h-full min-w-0">
+                <TechnologyCard item={item} flipped={flippedCards.has(id)} onToggle={() => toggleCard(id)} />
+              </div>
+            );
+          })}
+        </ScrollReveal>
       </Container>
     </Section>
   );
 }
 
-function TechnologyCard({ item }: { item: Stack }) {
+function TechnologyCard({ item, flipped, onToggle }: {
+  item: Stack;
+  flipped: boolean;
+  onToggle: () => void;
+}) {
   const { dict } = useDictionary();
-  const [flipped, setFlipped] = useState(false);
   const { flip, back } = dict.stack.cards;
 
   return (
     <button type="button" aria-label={`${item.name}: ${flipped ? back : flip}`} aria-pressed={flipped}
-      onClick={() => setFlipped((value) => !value)}
+      onClick={onToggle}
       className="technology-card h-full w-full rounded-2xl text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
       <span className="technology-card-inner" data-flipped={flipped}>
         <span className="technology-card-face border border-outline-variant/40 bg-surface-container-low shadow-sm" aria-hidden={flipped}>

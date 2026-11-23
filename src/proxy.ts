@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { defaultLocale, hasLocale, locales, type Locale } from "@/i18n/config";
+import { defaultLocale, hasLocale, LOCALE_REQUEST_HEADER, type Locale } from "@/i18n/config";
 
 function getPreferredLocale(request: NextRequest): Locale {
   const acceptLanguage = request.headers.get("accept-language");
@@ -29,12 +29,12 @@ function getPreferredLocale(request: NextRequest): Locale {
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
-  );
+  const segment = pathname.split("/")[1] ?? "";
 
-  if (pathnameHasLocale) {
-    return NextResponse.next();
+  if (hasLocale(segment)) {
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set(LOCALE_REQUEST_HEADER, segment);
+    return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
   const locale = getPreferredLocale(request);

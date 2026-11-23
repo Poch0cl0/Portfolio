@@ -5,7 +5,6 @@ import { siteConfig } from "@/config/site";
 import { ButtonLink } from "@/components/ui/button";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { useDictionary } from "@/i18n/dictionary-provider";
 
@@ -16,7 +15,7 @@ export function CTA() {
     <Section surface="lowest" id="contacto-banner" className="relative overflow-hidden">
       <div className="pointer-events-none absolute -bottom-20 right-1/4 h-72 w-72 rounded-full bg-primary/10 blur-[100px]" />
       <Container size="narrow" className="relative z-10">
-        <Reveal>
+        <div>
           <div className="flex flex-col gap-space-md rounded-2xl bg-surface-container p-space-lg shadow-2xl lg:p-space-xl">
           <div className="flex flex-col justify-between gap-space-md md:flex-row md:items-center">
             <div className="flex max-w-xl flex-col gap-1">
@@ -79,7 +78,7 @@ export function CTA() {
             </ButtonLink>
           </div>
           </div>
-        </Reveal>
+        </div>
       </Container>
     </Section>
   );

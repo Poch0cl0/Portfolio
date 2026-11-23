@@ -3,8 +3,8 @@
 import { Terminal } from "lucide-react";
 import { getCapabilities } from "@/data/capabilities";
 import { Badge } from "@/components/ui/badge";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 import {
   Section,
   SectionDescription,
@@ -29,7 +29,7 @@ export function Capabilities() {
   return (
     <Section surface="lowest">
       <Container>
-        <Reveal>
+        <ScrollReveal id="capabilities-heading">
           <SectionHeader className="flex flex-col justify-between gap-space-sm md:flex-row md:items-end">
             <div className="flex max-w-xl flex-col gap-1">
               <SectionKicker>
@@ -42,13 +42,13 @@ export function Capabilities() {
               {dict.home.capabilities.description}
             </SectionDescription>
           </SectionHeader>
-        </Reveal>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-1 gap-space-md md:grid-cols-2 lg:grid-cols-4">
-          {capabilities.map((capability, index) => {
+        <ScrollReveal id="capabilities-grid" className="grid grid-cols-1 gap-space-md md:grid-cols-2 lg:grid-cols-4">
+          {capabilities.map((capability) => {
             const Icon = capability.icon;
             return (
-              <Reveal key={capability.id} className={index > 0 ? `[animation-delay:${index * 80}ms]` : undefined}>
+              <div key={capability.id}>
                 <div className="flex h-full flex-col justify-between gap-space-md rounded-xl border border-transparent bg-surface-container p-space-lg shadow-sm transition-all duration-200 hover:glow-hover-primary hover:-translate-y-1 hover:bg-surface-container-high hover:shadow-2xl motion-reduce:transition-none motion-reduce:hover:translate-y-0">
                   <div className="flex flex-col gap-space-sm">
                     <div
@@ -74,10 +74,10 @@ export function Capabilities() {
                     ))}
                   </div>
                 </div>
-              </Reveal>
+              </div>
             );
           })}
-        </div>
+        </ScrollReveal>
       </Container>
     </Section>
   );

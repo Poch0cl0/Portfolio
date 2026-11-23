@@ -81,7 +81,7 @@ export function ProjectShowcaseContent({ project }: ProjectShowcaseContentProps)
               href={project.demoUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-secondary-container px-space-md py-2.5 text-body-sm font-semibold text-on-secondary-container transition-all duration-200 hover:glow-hover-secondary hover:scale-[1.04] hover:bg-secondary active:scale-[0.97] motion-reduce:transition-none motion-reduce:hover:scale-100"
+              className="inline-flex items-center gap-2 rounded-lg bg-secondary-container px-space-md py-2.5 text-body-sm font-semibold text-on-secondary-container transition-all duration-200 hover:glow-hover-secondary hover:scale-[1.04] hover:bg-secondary hover:text-on-secondary active:scale-[0.97] motion-reduce:transition-none motion-reduce:hover:scale-100"
             >
               {dict.common.viewDemo}
             </Link>

@@ -1,11 +1,16 @@
 {
   "hero": {
-    "name": "Jefferson Peña",
-    "role": "Full Stack Developer",
     "photoAlt": "Jefferson Peña Serrano, full-stack developer",
-    "description": "Systems Engineering student at Universidad Nacional de Trujillo, specializing in full-stack web development with Next.js, React, TypeScript, FastAPI, and PostgreSQL. I build applications that integrate Machine Learning and conversational AI to solve real problems.",
-    "viewProjects": "View Featured Projects",
-    "contactMe": "Contact me"
+    "headline": "I turn ideas into",
+    "headlineAccent": "software that makes an impact.",
+    "description": "I'm Jefferson Peña, a Full-Stack Developer and Systems Engineering student at Universidad Nacional de Trujillo. I design and build end-to-end web applications, combining frontend, backend and artificial intelligence to address real needs.",
+    "viewProjects": "Explore projects",
+    "downloadCv": "Download CV",
+    "profileLabel": "Profile and assistant",
+    "projectSummaries": {
+      "obstetricare": "A machine learning system that supports early detection of preterm birth risk.",
+      "amara": "An emotional well-being web platform with habit tracking and conversational support."
+    }
   },
   "profileCard": {
     "terminalPath": "sys://engineer.kernel/profile",
@@ -89,9 +94,9 @@
     "thinking": "Thinking...",
     "clear": "Clear conversation",
     "error": "Could not get a response. Please try again.",
-    "welcome": "Hi, I'm JeffBot, Jefferson's virtual assistant. Ask me about his stack, ObstetriCare, Amará, or architecture decisions.",
+    "welcome": "Hi! I'm **JeffBot**. I can help you learn about Jefferson's projects, technologies and education. What would you like to know?",
     "suggestions": {
-      "stack": "What technologies does Jefferson master in backend and frontend?",
+      "stack": "What technologies does he use?",
       "obstetricare": "How did he solve clinical prediction in ObstetriCare?",
       "amara": "What is his experience with Supabase and Next.js in Amará?",
       "about": "What is Jefferson's professional profile?",
@@ -101,8 +106,13 @@
       "obstetriCareSafety": "What safety and fallback measures does ObstetriCare use?",
       "amaraProduct": "What emotional-wellness features does Amará include?",
       "amaraSecurity": "How does Amará protect user data?",
-      "amaraArchitecture": "How does Amará use Next.js, Supabase, and AI?"
-    }
+      "amaraArchitecture": "How does Amará use Next.js, Supabase, and AI?",
+      "projects": "What are his projects?",
+      "education": "What is he studying?",
+      "contact": "How can I contact him?"
+    },
+    "subtitle": "Portfolio assistant",
+    "typing": "JeffBot is typing"
   },
   "aboutPreview": {
     "title": "About me",

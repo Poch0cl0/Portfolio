@@ -7,12 +7,14 @@ import {
   useEffect,
   useMemo,
   useState,
+  useSyncExternalStore,
 } from "react";
 import {
   DEFAULT_THEME,
   type ResolvedTheme,
   type ThemeSetting,
   THEME_STORAGE_KEY,
+  getServerThemeClass,
   parseThemeSetting,
   persistTheme,
 } from "@/lib/theme";
@@ -40,13 +42,30 @@ function applyTheme(theme: ThemeSetting) {
   document.documentElement.style.colorScheme = resolved;
 }
 
-function readStoredTheme(): ThemeSetting {
+function readStoredTheme(initialTheme: ThemeSetting): ThemeSetting {
   try {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
-    return parseThemeSetting(stored ?? undefined);
+    return parseThemeSetting(stored ?? undefined, initialTheme);
   } catch {
-    return DEFAULT_THEME;
+    return initialTheme;
   }
+}
+
+// The setting is read after hydration. Changes in this tab are set explicitly.
+function subscribeToInitialPreference() {
+  return () => {};
+}
+
+function subscribeToSystemTheme(onChange: () => void) {
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function handleChange() {
+    applyTheme("system");
+    onChange();
+  }
+
+  media.addEventListener("change", handleChange);
+  return () => media.removeEventListener("change", handleChange);
 }
 
 interface ThemeProviderProps {
@@ -55,38 +74,28 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children, initialTheme = DEFAULT_THEME }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<ThemeSetting>(initialTheme);
-  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(
-    initialTheme === "system" ? DEFAULT_THEME : initialTheme,
+  const [selectedTheme, setSelectedTheme] = useState<ThemeSetting>();
+  const storedTheme = useSyncExternalStore(
+    subscribeToInitialPreference,
+    () => readStoredTheme(initialTheme),
+    () => initialTheme,
+  );
+  const theme = selectedTheme ?? storedTheme;
+  const resolvedTheme = useSyncExternalStore(
+    theme === "system" ? subscribeToSystemTheme : subscribeToInitialPreference,
+    () => resolveTheme(theme),
+    () => getServerThemeClass(initialTheme),
   );
 
   useEffect(() => {
-    const stored = readStoredTheme();
-    setThemeState(stored);
+    const stored = readStoredTheme(initialTheme);
     applyTheme(stored);
-    setResolvedTheme(resolveTheme(stored));
     persistTheme(stored);
-  }, []);
-
-  useEffect(() => {
-    if (theme !== "system") {
-      return;
-    }
-
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = () => {
-      applyTheme("system");
-      setResolvedTheme(getSystemTheme());
-    };
-
-    media.addEventListener("change", handleChange);
-    return () => media.removeEventListener("change", handleChange);
-  }, [theme]);
+  }, [initialTheme]);
 
   const setTheme = useCallback((nextTheme: ThemeSetting) => {
-    setThemeState(nextTheme);
+    setSelectedTheme(nextTheme);
     applyTheme(nextTheme);
-    setResolvedTheme(resolveTheme(nextTheme));
     persistTheme(nextTheme);
   }, []);
 

@@ -1,71 +1,92 @@
 "use client";
 
+import { useLayoutEffect, useRef, type FocusEvent } from "react";
+import Image from "next/image";
+import { FileText } from "lucide-react";
 import { assets } from "@/config/assets";
-import { ChatAssistantSection } from "@/components/sections/chat-assistant-section";
-import { AssetImage } from "@/components/ui/asset-image";
-import { ButtonLink } from "@/components/ui/button";
-import { ContactTrigger } from "@/features/contact/components/contact-trigger";
-import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
-import { Section } from "@/components/ui/section";
+import { siteConfig } from "@/config/site";
+import { getFeaturedProjects } from "@/data/projects";
 import { useDictionary } from "@/i18n/dictionary-provider";
+import { GitHubIcon, LinkedInIcon } from "@/components/ui/social-icons";
+import { ChatAssistantSection } from "./chat-assistant-section";
+import styles from "./hero.module.css";
+
+let heroPresented = false;
+
+function showOnFocus(event: FocusEvent<HTMLElement>) {
+  event.currentTarget.dataset.interacted = "true";
+}
 
 export function Hero() {
   const { dict } = useDictionary();
+  const { hero } = dict.home;
+  const portrait = assets.heroPortrait;
+  const projects = getFeaturedProjects(dict);
+  const section = useRef<HTMLElement>(null);
+
+  useLayoutEffect(() => {
+    const element = section.current;
+    if (!element || element.dataset.presentation) return;
+
+    // A locale change can remount the Hero without loading a new document.
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    element.dataset.presentation = heroPresented || reduceMotion ? "skip" : "initial";
+    heroPresented = true;
+  }, []);
 
   return (
-    <Section id="sobre-mi" className="relative scroll-mt-24 overflow-hidden pt-6 lg:pt-10">
-      <div className="pointer-events-none absolute -top-40 right-10 h-96 w-96 rounded-full bg-primary/10 blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-0 left-1/4 h-80 w-80 rounded-full bg-secondary/5 blur-[100px]" />
-      <div className="pointer-events-none absolute top-1/2 right-1/3 h-64 w-64 rounded-full bg-tertiary/5 blur-[90px]" />
-
-      <Container className="relative z-10">
-        <div className="grid grid-cols-1 items-start gap-space-lg lg:grid-cols-12 lg:gap-12">
-          <Reveal className="flex flex-col items-start gap-space-md lg:col-span-7">
-            <div className="flex flex-col gap-1">
-              <h1 className="text-display text-on-surface">
-                {dict.home.hero.name}
-              </h1>
-              <p className="font-mono text-body-md font-medium uppercase tracking-wider text-primary">
-                {dict.home.hero.role}
-              </p>
+    <section ref={section} className={styles.hero} aria-labelledby="hero-title">
+      <div className={styles.container}>
+        <div className={styles.layout}>
+          <div id="sobre-mi" className={styles.intro}>
+            <h1 id="hero-title">
+              <span className="motion-enter">{hero.headline}</span>{" "}
+              <em className="motion-enter">{hero.headlineAccent}</em>
+            </h1>
+            <p className={`${styles.description} motion-enter`}>{hero.description}</p>
+            <div className={styles.actions}>
+              <a className={styles.primary} href="#proyectos-destacados">{hero.viewProjects}</a>
+              <a className={styles.secondary} href={assets.cv.src} download>
+                <FileText size={16} aria-hidden="true" />
+                {hero.downloadCv}
+              </a>
+              <div className={styles.socials}>
+                <a href={siteConfig.github} aria-label="GitHub"><GitHubIcon width={18} height={18} /></a>
+                <a href={siteConfig.linkedin} aria-label="LinkedIn"><LinkedInIcon width={18} height={18} /></a>
+              </div>
             </div>
 
-            <AssetImage
-              assetKey="heroPortrait"
-              alt={dict.home.hero.photoAlt}
-              priority
-              className="aspect-[4/3] w-full rounded-2xl object-cover"
-            />
-
-            <p className="w-full text-body-lg text-on-surface-variant">
-              {dict.home.hero.description}
-            </p>
-
-            <div className="flex w-full flex-wrap items-center gap-space-sm pt-2 sm:w-auto">
-              <ButtonLink href="#proyectos-destacados" size="lg">
-                {dict.home.hero.viewProjects}
-              </ButtonLink>
-              <ContactTrigger variant="secondary" size="lg">
-                {dict.home.hero.contactMe}
-              </ContactTrigger>
-              <ButtonLink
-                href={assets.cv.src}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="outline"
-                size="lg"
-              >
-                {dict.common.downloadCv}
-              </ButtonLink>
-            </div>
-          </Reveal>
-
-          <div className="w-full lg:col-span-5">
-            <ChatAssistantSection embedded />
+            <ul className={styles.projects}>
+              {projects.map(({ slug, title }) => (
+                <li key={slug} className="motion-enter" onFocusCapture={showOnFocus}>
+                  <a className="motion-hover-lift" href={`#${slug}`}>
+                    <strong>{title}</strong>
+                    <span>{hero.projectSummaries[slug]}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
+
+          <aside className={styles.sidebar} aria-label={hero.profileLabel}>
+            <figure className={styles.portrait}>
+              <Image
+                src={portrait.src}
+                width={portrait.width}
+                height={portrait.height}
+                alt={hero.photoAlt}
+                sizes="(min-width: 64rem) 39vw, 93vw"
+                loading="eager"
+                fetchPriority="high"
+              />
+              <figcaption>{siteConfig.name}</figcaption>
+            </figure>
+            <div className={`${styles.assistant} motion-enter`} onFocusCapture={showOnFocus}>
+              <ChatAssistantSection />
+            </div>
+          </aside>
         </div>
-      </Container>
-    </Section>
+      </div>
+    </section>
   );
 }

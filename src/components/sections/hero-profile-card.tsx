@@ -2,7 +2,6 @@
 
 import { GraduationCap } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { Reveal } from "@/components/ui/reveal";
 import { useDictionary } from "@/i18n/dictionary-provider";
 
 export function HeroProfileCard() {
@@ -10,7 +9,7 @@ export function HeroProfileCard() {
   const code = dict.home.profileCard.code;
 
   return (
-    <Reveal className="flex w-full flex-col gap-space-md">
+    <div className="flex w-full flex-col gap-space-md">
       <div className="flex flex-col gap-space-sm rounded-xl bg-surface-container-lowest p-space-md shadow-xl">
         <div className="flex items-center justify-between pb-2">
           <div className="flex items-center gap-1.5">
@@ -116,6 +115,6 @@ export function HeroProfileCard() {
           </span>
         </div>
       </div>
-    </Reveal>
+    </div>
   );
 }

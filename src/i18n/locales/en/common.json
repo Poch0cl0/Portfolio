@@ -4,6 +4,16 @@
     "about": "About",
     "stack": "Stack"
   },
+  "header": {
+    "home": "Home",
+    "technologies": "Technologies",
+    "contact": "Contact",
+    "navigation": "Main navigation",
+    "language": "Language",
+    "darkMode": "Dark mode",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
   "footer": {
     "navigation": "Navigation",
     "directContact": "Direct contact",

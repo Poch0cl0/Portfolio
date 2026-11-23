@@ -15,7 +15,7 @@ export function createContactSchema(messages: {
 
 export type ContactFormValues = z.infer<ReturnType<typeof createContactSchema>>;
 
-export function createChatSchema(messages: { messageEmpty: string }) {
+export function createChatSchema() {
   return z.object({
     locale: z.enum(["es", "en"]),
     messages: z
@@ -39,8 +39,6 @@ export const contactSchema = createContactSchema({
   messageMin: "El mensaje debe tener al menos 10 caracteres.",
 });
 
-export const chatSchema = createChatSchema({
-  messageEmpty: "El mensaje no puede estar vacío.",
-});
+export const chatSchema = createChatSchema();
 
 export type ChatFormValues = z.infer<typeof chatSchema>;

@@ -1,87 +1,101 @@
 "use client";
 
 import Link from "next/link";
+import { useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { LayoutGroup, motion, useReducedMotion } from "framer-motion";
+import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import { sectionHref, sectionNavigation } from "@/config/navigation";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { LocaleSwitcher } from "@/components/layout/locale-switcher";
-import { ContactTrigger } from "@/features/contact/components/contact-trigger";
-import { MonogramBadge } from "@/components/ui/asset-image";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { Container } from "@/components/ui/container";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { ContactTrigger } from "@/features/contact/components/contact-trigger";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useDictionary } from "@/i18n/dictionary-provider";
-import { cn } from "@/lib/utils";
+import styles from "./navbar.module.css";
 
 const sectionIds = sectionNavigation.map((item) => item.id);
+let navbarEntered = false;
 
-export function Navbar() {
+export function Navbar({ fontVariables }: { fontVariables: string }) {
   const pathname = usePathname();
   const { locale, dict } = useDictionary();
-  const activeSection = useActiveSection(sectionIds);
+  const { activeId, compact } = useActiveSection(sectionIds, pathname);
+  const reducedMotion = useReducedMotion();
   const homeHref = `/${locale}`;
+  const labels = dict.common.header;
+  const active = pathname === homeHref ? activeId : null;
+  const shell = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const element = shell.current;
+    if (!element || element.dataset.entry) return;
+    element.dataset.entry = navbarEntered ? "skip" : "initial";
+    navbarEntered = true;
+  }, []);
+
 
   function scrollToTop(event: React.MouseEvent<HTMLAnchorElement>) {
-    if (pathname === homeHref) {
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    if (pathname !== homeHref || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
     }
+    event.preventDefault();
+    if (window.location.hash) window.history.replaceState(null, "", homeHref + window.location.search);
+    window.scrollTo({ top: 0, behavior: reducedMotion ? "instant" : "smooth" });
+  }
+
+  function renderNavigation(desktop: boolean, onNavigate?: () => void) {
+    const items = sectionNavigation.map(({ id, labelKey }) => ({
+      id,
+      label: labelKey === "stack" ? labels.technologies : dict.common.nav[labelKey],
+      href: `${pathname === homeHref ? "" : homeHref}${sectionHref(id)}`,
+    }));
+
+    return (
+      <nav aria-label={labels.navigation} className={desktop ? styles.dock : styles.mobileDock}>
+        {items.map(({ id, label, href }) => (
+          <Link
+            key={id}
+            href={href}
+            className={cn(styles.navItem, "motion-transition-colors")}
+            aria-current={active === id ? "location" : undefined}
+            onClick={onNavigate}
+          >
+            {desktop && active === id ? (
+              <motion.span
+                aria-hidden="true"
+                className={styles.indicator}
+                layoutId={reducedMotion ? undefined : "active"}
+                initial={false}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              />
+            ) : null}
+            <span>{label}</span>
+          </Link>
+        ))}
+        <ContactTrigger variant="ghost" className={cn(styles.navItem, "motion-transition-colors")} onClick={onNavigate}>
+          <span>{labels.contact}</span>
+        </ContactTrigger>
+      </nav>
+    );
   }
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-outline-variant/60 bg-surface/85 backdrop-blur-xl">
-      <Container className="flex h-16 items-center justify-between gap-space-md">
-        <Link
-          href={homeHref}
-          onClick={scrollToTop}
-          className="flex shrink-0 items-center rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
-          aria-label="Jefferson Peña — Inicio"
-        >
-          <MonogramBadge className="h-10 w-10 border border-primary/30 shadow-sm transition-transform duration-200 hover:scale-105" />
+    <header className={cn(styles.header, fontVariables)} data-compact={compact}>
+      <div className={styles.shell} ref={shell}>
+        <Link href={homeHref} onClick={scrollToTop} className={styles.brand}
+          aria-label={`${siteConfig.shortName} · ${labels.home}`}>
+          <span aria-hidden="true" className={styles.monogram}>JP</span>
+          <span className={styles.name}>{siteConfig.shortName}</span>
         </Link>
-
-        <nav className="hidden items-center gap-space-xs rounded-full bg-surface-container-low px-space-xs py-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)] xl:flex">
-          {sectionNavigation.map((item) => {
-            const active = activeSection === item.id;
-
-            return (
-              <Link
-                key={item.id}
-                href={sectionHref(item.id)}
-                className={cn(
-                  "rounded-full px-space-sm py-1.5 text-body-sm transition-all duration-200 hover:scale-105 hover:glow-hover-primary motion-reduce:transition-none motion-reduce:hover:scale-100",
-                  active
-                    ? "bg-surface-container-high font-medium text-primary glow-primary"
-                    : "text-on-surface-variant hover:text-on-surface",
-                )}
-              >
-                {dict.common.nav[item.labelKey]}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="flex shrink-0 items-center gap-space-sm">
-          {siteConfig.availableForProjects ? (
-            <div className="hidden items-center gap-space-xs rounded-full bg-surface-container-low px-space-sm py-1 text-primary sm:flex">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-              </span>
-              <span className="font-mono text-label-caps tracking-wide">
-                {dict.common.availability}
-              </span>
-            </div>
-          ) : null}
+        <LayoutGroup id="portfolio-navigation">{renderNavigation(true)}</LayoutGroup>
+        <div className={styles.preferences}>
           <LocaleSwitcher />
           <ThemeToggle />
-          <ContactTrigger size="sm" className="hidden md:inline-flex">
-            {dict.common.contact}
-          </ContactTrigger>
-          <MobileNav activeSection={activeSection} />
+          <MobileNav key={locale}>{(close) => renderNavigation(false, close)}</MobileNav>
         </div>
-      </Container>
+      </div>
     </header>
   );
 }
